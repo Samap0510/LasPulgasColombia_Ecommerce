@@ -6,7 +6,7 @@ exports.crearUsuario = async ( req, res) => {
     const {password , email} = req.body;
     
     try{
-        // revisar que sea un unico usuario registrado
+        // validacion de usuario, no deben existir dos usuarios con el mismo correo
         let usuario = await Usuario.findOne({ email});
 
         if (usuario) {
