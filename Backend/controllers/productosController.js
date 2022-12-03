@@ -12,7 +12,7 @@ exports.obtenerProducto = async ( req, res) => {
 };
 exports.crearProducto = async ( req, res) => {
     const {categoriaId} =  req.body;
-
+// revisamos si el id de la categoria se encuatra en la base de datos.
     try{
         const foundCategry = await categoria.findById(categoriaId);
 
