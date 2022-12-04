@@ -14,13 +14,13 @@ exports.crearProducto = async ( req, res) => {
     const {categoriaId} =  req.body;
 // revisamos si el id de la categoria se encuatra en la base de datos.
     try{
-        const foundCategry = await categoria.findById(categoriaId);
+        const foundCategry = await Categorias.findById(categoriaId);
 
         console.log(foundCategry);
         
         const producto = new Productos(req.body);
         
-        producto.categoriaId = req.categoria.id;
+        producto.creador = req.usuario.id;
         producto.save();
     
         res.json(producto);
@@ -42,6 +42,7 @@ exports.actualizarProducto = async ( req, res) => {
     producto.stock = req.body.stock || producto.stock;
     producto.precio = req.body.precio || producto.precio;
     producto.imagen = req.body.imagen || producto.imagen;
+    producto.categoriaId = req.body.categoriaId || producto.categoriaId;
 
     producto.save();
 
@@ -51,7 +52,7 @@ exports.actualizarProducto = async ( req, res) => {
 
 exports.borrarProducto = async ( req, res) => {
     try{
-        await Productos.deleteOne({ _id: req.params.id});
+        await Productos.deleteOne({ id: req.params.id});
         res.json({ msg: "Producto eliminado"});
     }catch(error){
         console.log(error);

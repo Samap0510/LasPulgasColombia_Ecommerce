@@ -5,8 +5,8 @@ const productosController = require("../controllers/productosController");
 
 router.get("/",authMidd, productosController.obtenerProducto );
 router.post("/",authMidd,productosController.crearProducto );
-router.put("/",authMidd, productosController.actualizarProducto );
-router.delete("/" ,authMidd,productosController.borrarProducto);
+router.put("/:id",authMidd, productosController.actualizarProducto );
+router.delete("/:id" ,authMidd,productosController.borrarProducto);
 
 // definir las rutas
 module.exports = router;
